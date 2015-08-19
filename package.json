@@ -1,0 +1,32 @@
+{
+  "name": "graphql-mongodb-example",
+  "version": "0.0.1",
+  "description": "An example of Express and MongoDB with Relay and GraphQL working together",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sayden/graphql-mongodb-example.git"
+  },
+  "keywords": [
+    "graphql",
+    "react",
+    "relay",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "Mario Castro <mariocaster@gmail.com> (http://mariocaster.blogspot.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sayden/graphql-mongodb-example/issues"
+  },
+  "homepage": "https://github.com/sayden/graphql-mongodb-example#readme",
+  "dependencies": {
+    "babel": "^5.8.21",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "graphql": "^0.4.2"
+  }
+}
