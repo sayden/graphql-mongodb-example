@@ -27,6 +27,7 @@
     "babel": "^5.8.21",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "graphql": "^0.4.2"
+    "graphql": "^0.4.2",
+    "graphql-relay": "^0.3.1"
   }
 }
