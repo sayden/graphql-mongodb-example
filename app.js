@@ -5,9 +5,11 @@ import {graphql} from 'graphql';
 import bodyparser from 'body-parser';
 
 import mongoose from 'mongoose';
-import UserSchema from './UserSchema.es6';
 
-let user = new UserSchema({name:"Mario", surname: "Castro"});
+import User from './Models/User/UserSchema.es6';
+
+//Add a fake user to the DDBB
+let user = new User({name:"Mario", surname: "Castro"});
 
 let db = mongoose.connection;
 db.on('open', function(callback){

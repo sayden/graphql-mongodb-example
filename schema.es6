@@ -20,63 +20,25 @@ import {
   } from 'graphql-relay';
 
 import mongoose from 'mongoose';
-import UserSchema from './Models/UserSchema.es6';
-import AnimalSchema from './Models/AnimalSchema.es6';
+import User from './Models/User/UserSchema.es6';
+import Animal from './Models/Animal/AnimalSchema.es6';
+
+import {
+  UserQueries,
+  UserMutations,
+  UserType
+  } from './Models/User/UserQL.es6';
 
 
 //Persistence done in a variable (anything you like)
 let _name = "";
 let count = 0;
 
-const UserType = new GraphQLObjectType({
-  name: 'User',
-  description: 'A user',
-  fields: () => ({
-    _id: {
-      type: new GraphQLNonNull(GraphQLID),
-    },
-    name: {
-      type: GraphQLString
-    },
-    surname:{
-      type: GraphQLString
-    },
-    friends:{
-      type: new GraphQLList(GraphQLID)
-    }
-  })
-});
-
-
 let RootQuery = new GraphQLObjectType({
   name: 'Query',      //Return this type of object
   fields: () => ({
-    userList: {
-      type: new GraphQLList(UserType),
-      resolve: () => {
-        return new Promise((resolve, reject) => {
-          UserSchema.find({}, (err, res) => {
-            console.log(err, res);
-            err ? reject(err) : resolve(res);
-          });
-        });
-      }
-    },
-    user: {
-      type: UserType,
-      args: {
-        id: {
-          type: GraphQLID
-        }
-      },
-      resolve: (root, {id}) => {
-        return new Promise((resolve, reject) => {
-          UserSchema.find({}, (err, res) => {
-            err ? reject(err) : resolve(res[id]);
-          });
-        });
-      }
-    },
+    user: UserQueries.user,
+    userList: UserQueries.userList,
     say: {
       type: GraphQLString,
       args: {
@@ -114,6 +76,7 @@ let RootQuery = new GraphQLObjectType({
 let RootMutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    addUser: UserMutations.addUser,
     name: {
       type: GraphQLString,
       args: {
