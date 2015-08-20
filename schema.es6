@@ -20,7 +20,9 @@ import {
   } from 'graphql-relay';
 
 import mongoose from 'mongoose';
-import UserSchema from './UserSchema.es6';
+import UserSchema from './Models/UserSchema.es6';
+import AnimalSchema from './Models/AnimalSchema.es6';
+
 
 //Persistence done in a variable (anything you like)
 let _name = "";
