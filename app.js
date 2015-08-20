@@ -1,4 +1,5 @@
 import express from 'express';
+import counterSchema from './counterSchema';
 import schema from './schema';
 
 import {graphql} from 'graphql';
