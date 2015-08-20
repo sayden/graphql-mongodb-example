@@ -1,6 +1,5 @@
 import express from 'express';
-import counterSchema from './counterSchema';
-import schema from './schema';
+import schema from './schema.es6';
 
 import {graphql} from 'graphql';
 import bodyparser from 'body-parser';
