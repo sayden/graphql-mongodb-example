@@ -4,6 +4,16 @@ import schema from './schema.es6';
 import {graphql} from 'graphql';
 import bodyparser from 'body-parser';
 
+import mongoose from 'mongoose';
+import UserSchema from './UserSchema.es6';
+
+let user = new UserSchema({name:"Mario", surname: "Castro"});
+
+let db = mongoose.connection;
+db.on('open', function(callback){
+  user.save();
+});
+
 let app  = express();
 let PORT = 9000;
 
@@ -20,4 +30,5 @@ app.post('/', (req, res) => {
 
 let server = app.listen(PORT, function () {
   console.log(`Server listening at ${PORT}`);
+  mongoose.connect('mongodb://localhost/test');
 });

@@ -4,8 +4,10 @@ import {
   GraphQLSchema,
   GraphQLString,
   GraphQLInt,
-  GraphQLNonNull
-} from 'graphql';
+  GraphQLNonNull,
+  GraphQLList,
+  GraphQLID
+  } from 'graphql';
 
 import {
   connectionArgs,
@@ -15,25 +17,68 @@ import {
   globalIdField,
   mutationWithClientMutationId,
   nodeDefinitions,
-} from 'graphql-relay';
+  } from 'graphql-relay';
+
+import mongoose from 'mongoose';
+import UserSchema from './UserSchema.es6';
 
 //Persistence done in a variable (anything you like)
 let _name = "";
 let count = 0;
 
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  description: 'A user',
+  fields: () => ({
+    _id: {
+      type: new GraphQLNonNull(GraphQLID),
+    },
+    name: {
+      type: GraphQLString
+    },
+    surname:{
+      type: GraphQLString
+    },
+    friends:{
+      type: new GraphQLList(GraphQLID)
+    }
+  })
+});
 
-/*
- * query Counter {
- *   count
- * }
- */
+
 let RootQuery = new GraphQLObjectType({
   name: 'Query',      //Return this type of object
-  fields: {
-    say:{
+  fields: () => ({
+    userList: {
+      type: new GraphQLList(UserType),
+      resolve: () => {
+        return new Promise((resolve, reject) => {
+          UserSchema.find({}, (err, res) => {
+            console.log(err, res);
+            err ? reject(err) : resolve(res);
+          });
+        });
+      }
+    },
+    user: {
+      type: UserType,
+      args: {
+        id: {
+          type: GraphQLID
+        }
+      },
+      resolve: (root, {id}) => {
+        return new Promise((resolve, reject) => {
+          UserSchema.find({}, (err, res) => {
+            err ? reject(err) : resolve(res[id]);
+          });
+        });
+      }
+    },
+    say: {
       type: GraphQLString,
-      args:{
-        message:{
+      args: {
+        message: {
           name: 'message',
           type: GraphQLString
         }
@@ -60,17 +105,17 @@ let RootQuery = new GraphQLObjectType({
         return count;
       }
     }
-  }
+  })
 });
 
 
 let RootMutation = new GraphQLObjectType({
   name: "Mutation",
-  fields:{
-    name:{
+  fields: {
+    name: {
       type: GraphQLString,
-      args:{
-        name:{
+      args: {
+        name: {
           name: 'name',
           type: GraphQLString
         }
@@ -80,10 +125,10 @@ let RootMutation = new GraphQLObjectType({
         return _name;
       }
     },
-    raiseCounter:{
+    raiseCounter: {
       type: GraphQLInt,
-      args:{
-        amount:{
+      args: {
+        amount: {
           name: 'amount',
           type: GraphQLInt
         }
@@ -93,10 +138,10 @@ let RootMutation = new GraphQLObjectType({
         return count;
       }
     },
-    dropCounter:{
+    dropCounter: {
       type: GraphQLInt,
-      args:{
-        amount:{
+      args: {
+        amount: {
           name: 'amount',
           type: GraphQLInt
         }
