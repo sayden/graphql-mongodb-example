@@ -8,27 +8,20 @@ import {
   GraphQLID
   } from 'graphql';
 
-import User from './UserSchema.es6';
-import HobbyType from '../Hobby/HobbyTypeQL.es6';
+import Hobby from './HobbySchema.es6';
 
 export default new GraphQLObjectType({
-  name: 'User',
-  description: 'A user',
+  name: 'Hobby',
+  description: 'A hobby',
   fields: () => ({
     _id: {
       type: new GraphQLNonNull(GraphQLID)
     },
-    name: {
+    title: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    description:{
       type: GraphQLString
-    },
-    surname:{
-      type: GraphQLString
-    },
-    age:{
-      type: GraphQLInt
-    },
-    hobbies:{
-      type: new GraphQLList(HobbyType)
     }
   })
 });

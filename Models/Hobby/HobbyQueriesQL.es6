@@ -8,22 +8,32 @@ import {
   GraphQLID
   } from 'graphql';
 
-import UserType from './UserTypeQL.es6';
-import User from './UserSchema.es6';
+import HobbyType from './HobbyTypeQL.es6';
+import Hobby from './HobbySchema.es6';
 
 export default {
-  listUser: {
-    type: new GraphQLList(UserType),
+  hobbies: {
+    type: new GraphQLList(HobbyType),
     resolve: () => {
       return new Promise((resolve, reject) => {
-        User.find({}).populate('hobbies').exec((err, res) => {
+        Hobby.find({}, (err, res) => {
+          err ? reject(err) : resolve(res.hobbies);
+        });
+      });
+    }
+  },
+  listHobbies: {
+    type: new GraphQLList(HobbyType),
+    resolve: () => {
+      return new Promise((resolve, reject) => {
+        Hobby.find({}, (err, res) => {
           err ? reject(err) : resolve(res);
         });
       });
     }
   },
-  findUserById: {
-    type: UserType,
+  findHobbyById: {
+    type: HobbyType,
     args: {
       id: {
         type: GraphQLID
@@ -32,12 +42,8 @@ export default {
     resolve: (root, {id}) => {
       return new Promise((resolve, reject) => {
         //User is a Mongoose schema
-        User.find({}).populate('hobbies').exec((err, res) => {
-          if (id == undefined) {
-            err ? reject(err) : resolve(res);
-          } else {
+        Hobby.find({}, (err, res) => {
             err ? reject(err) : resolve(res[id]);
-          }
         });
       });
     }

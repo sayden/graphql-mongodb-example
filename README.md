@@ -126,10 +126,10 @@ In GraphQL we are going to separate the actions of our API between **Queries** (
 
 This is a personal preference, to split the Model in 4 files as the could grow dangerously and I don't like big (>1000 lines) files.
 
-* **UserTypeQL.es6** -> This is what we could call GraphQL model where you establish the fields it has, their type (string, int...) and so on.
+* **HobbyTypeQL.es6** -> This is what we could call GraphQL model where you establish the fields it has, their type (string, int...) and so on.
 * **UserMutationsQL.es6** -> Here we will describe the mutations, the actions that can alter the database.
 * **UserQueriesQL.es6** -> The queries against this model on the database, they can't alter it.
-* **UserQL.es6** -> A file to govern them all... I mean... A single point of entrance to the entire model.
+* **HobbyQL.es6** -> A file to govern them all... I mean... A single point of entrance to the entire model.
 
 ### User type file
 The User type file is where we really define the properties of an model. We define *what it is compose of* but we aren't defining yet what it can do.
@@ -238,7 +238,7 @@ export default {
 Finally when defining models, we like to use a `[Model]QL` file that will hold all the information previously done.
 
 ```javascript
-import _UserType from './UserTypeQL.es6';
+import _UserType from './HobbyTypeQL.es6';
 import _UserQueries from './UserQueriesQL.es6';
 import _UserMutations from './UserMutationsQL.es6';
 
