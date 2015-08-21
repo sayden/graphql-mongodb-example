@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/sayden/graphql-mongodb-example#readme",
   "dependencies": {
-    "async": "^1.4.2",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "graphql": "^0.4.2",
@@ -32,6 +31,9 @@
   },
   "devDependencies": {
     "babel": "^5.8.21",
+    "babel-relay-plugin": "^0.1.2",
+    "babelify": "^6.2.0",
+    "browserify": "^11.0.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
     "gulp-load-plugins": "^0.10.0",
