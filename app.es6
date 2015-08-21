@@ -36,6 +36,9 @@ let PORT = 9000;
 //Let's use the body-parser middleware
 app.use(bodyparser.text({type: 'application/graphql'}));
 
+app.use('/node_modules', express.static('node_modules'));
+app.use('/', express.static('index.html'));
+
 app.post('/', (req, res) => {
   //Execute the query
   graphql(schema, req.body)

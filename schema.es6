@@ -9,16 +9,6 @@ import {
   GraphQLID
   } from 'graphql';
 
-import {
-  connectionArgs,
-  connectionDefinitions,
-  connectionFromArray,
-  fromGlobalId,
-  globalIdField,
-  mutationWithClientMutationId,
-  nodeDefinitions,
-  } from 'graphql-relay';
-
 import mongoose from 'mongoose';
 import User from './Models/User/UserSchema.es6';
 import Hobby from './Models/Hobby/HobbySchema.es6';
