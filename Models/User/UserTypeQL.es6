@@ -23,6 +23,9 @@ export default new GraphQLObjectType({
     surname:{
       type: GraphQLString
     },
+    age:{
+      type: GraphQLInt
+    },
     hobbies:{
       type: new GraphQLList(GraphQLString)
     }

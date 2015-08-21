@@ -2,7 +2,7 @@
 
 This is a project to show how to work with a Express app with GraphQL and MongoDB persistence... written in ES6 :)
 
-## How to install
+## How to install the example
 
 ```bash
 $ git clone https://github.com/sayden/graphql-mongodb-example.git
@@ -10,6 +10,95 @@ $ npm install
 $ gulp
 ```
 ---
+
+## Using it
+For easyness, we will use Postman to make queries:
+
+* Asking for the user with ID 0 (actually, the position 0 on the user list for easyness)
+```graphql
+query RootQuery {
+	user (id:0) {
+    	name
+    }
+}
+```
+Gives
+```json
+{
+    "data": {
+        "user": {
+            "name": "Mario"
+        }
+    }
+}
+```
+
+* Asking for the user with ID 999 (it does not exists yet)
+```graphql
+query RootQuery {
+	user (id:999) {
+    	name
+    }
+}
+```
+Gives
+```json
+{
+    "data": {
+        "user": null
+    }
+}
+```
+
+* Asking for the name, surname, age and ID of user with ID 6
+```graphql
+query RootQuery {
+	user (id:6) {
+    	name
+        surname
+        age
+        _id
+    }
+}
+```
+Gives
+```json
+{
+    "data": {
+        "user": {
+            "name": "Mario",
+            "surname": "Caster",
+            "_id": "55d70b33f53053b9239e3fbe",
+            "age": 30
+        }
+    }
+}
+```
+* Adding a new user called Linus Torvalds of age 45 and getting the new info
+```graphql
+mutation RootMutation {
+	addUser (name: "Linus", surname:"Torvalds", age:45) {
+    	name
+        surname
+        _id
+        age
+    }
+}
+```
+
+Gives
+```javascript
+{
+    "data": {
+        "addUser": {
+            "name": "Linus",
+            "surname": "Torvalds",
+            "_id": "55d70e25f53053b9239e3fbf",
+            "age": 45
+        }
+    }
+}
+```
 
 ## GraphQL
 GraphQL is a new concept to define queries around a front end. It's a mix between SQL and REST but the best way to understand it is through a example.
@@ -93,6 +182,7 @@ export default {
       return new Promise((resolve, reject) => {
         //User is a Mongoose schema
         User.find({}, (err, res) => {
+          // Actually, we are not searching the ID but returning the position in the iterator
           err ? reject(err) : resolve(res[id]);
         });
       });

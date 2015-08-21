@@ -22,10 +22,14 @@ export default {
       surname:{
         name:'surname',
         type: new GraphQLNonNull(GraphQLString)
+      },
+      age:{
+        name:'age',
+        type: GraphQLInt
       }
     },
-    resolve: (root, {name, surname}) => {
-      var newUser = new User({name:name, surname:surname});
+    resolve: (root, {name, surname, age}) => {
+      var newUser = new User({name:name, surname:surname, age:age});
 
       return new Promise((resolve, reject) => {
         newUser.save((err, res) => {

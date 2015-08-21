@@ -33,7 +33,11 @@ export default {
       return new Promise((resolve, reject) => {
         //User is a Mongoose schema
         User.find({}, (err, res) => {
-          err ? reject(err) : resolve(res[id]);
+          if (id == undefined) {
+            err ? reject(err) : resolve(res);
+          } else {
+            err ? reject(err) : resolve(res[id]);
+          }
         });
       });
     }
