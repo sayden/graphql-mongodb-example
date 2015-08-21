@@ -1,4 +1,4 @@
 'use strict';
 
 require('babel/register');
-require('./app.js');
+require('./app.es6');

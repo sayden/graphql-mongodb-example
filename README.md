@@ -215,6 +215,7 @@ app.post('/', (req, res) => {
 1. We must know that our GraphQL queries must come with the `application/graphql` Content-Type. We use body-parser to get the response.
 2. Then we define an endpoint in '/' to receive **all queries and mutations**. This is completely different on how you would do it in RESTful.
 3. Finally, we call the `graphql()` function with out defined schema. Pretty simple.
+
 ---
 
 # Roadmap
