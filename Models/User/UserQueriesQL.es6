@@ -31,6 +31,7 @@ export default {
     },
     resolve: (root, {id}) => {
       return new Promise((resolve, reject) => {
+        //User is a Mongoose schema
         User.find({}, (err, res) => {
           err ? reject(err) : resolve(res[id]);
         });

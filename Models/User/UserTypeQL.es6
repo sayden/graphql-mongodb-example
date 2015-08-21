@@ -23,8 +23,8 @@ export default new GraphQLObjectType({
     surname:{
       type: GraphQLString
     },
-    friends:{
-      type: new GraphQLList(GraphQLID)
+    hobbies:{
+      type: new GraphQLList(GraphQLString)
     }
   })
 });
