@@ -12,7 +12,7 @@ import UserType from './UserTypeQL.es6';
 import User from './UserSchema.es6';
 
 export default {
-  listUser: {
+  users: {
     type: new GraphQLList(UserType),
     resolve: () => {
       return new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ export default {
       });
     }
   },
-  findUserById: {
+  user: {
     type: UserType,
     args: {
       id: {

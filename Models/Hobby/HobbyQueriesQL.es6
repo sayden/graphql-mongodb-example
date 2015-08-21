@@ -22,17 +22,7 @@ export default {
       });
     }
   },
-  listHobbies: {
-    type: new GraphQLList(HobbyType),
-    resolve: () => {
-      return new Promise((resolve, reject) => {
-        Hobby.find({}, (err, res) => {
-          err ? reject(err) : resolve(res);
-        });
-      });
-    }
-  },
-  findHobbyById: {
+  hobby: {
     type: HobbyType,
     args: {
       id: {

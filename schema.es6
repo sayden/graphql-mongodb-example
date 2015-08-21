@@ -39,10 +39,9 @@ import {
 let RootQuery = new GraphQLObjectType({
   name: 'Query',      //Return this type of object
   fields: () => ({
-    findUserById: UserQueries.findUserById,
-    listUser: UserQueries.listUser,
-    findHobbyById: HobbyQueries.findHobbyById,
-    listHobbies: HobbyQueries.listHobbies,
+    user: UserQueries.user,
+    users: UserQueries.users,
+    hobby: HobbyQueries.hobby,
     hobbies: HobbyQueries.hobbies
   })
 });
