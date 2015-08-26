@@ -19,6 +19,7 @@ For easyness, we will use Postman to make queries:
 query RootQuery {
 	user (id:0) {
     	name
+      surname
     }
 }
 ```
@@ -27,33 +28,17 @@ Gives
 {
     "data": {
         "user": {
-            "name": "Mario"
+            "name": "Richard",
+            "surname": "Stallman"
         }
     }
 }
 ```
 
-* Asking for the user with ID 999 (it does not exists yet)
+* Asking for the name, surname, age and ID of user with ID 2
 ```graphql
 query RootQuery {
-	user (id:999) {
-    	name
-    }
-}
-```
-Gives
-```json
-{
-    "data": {
-        "user": null
-    }
-}
-```
-
-* Asking for the name, surname, age and ID of user with ID 6
-```graphql
-query RootQuery {
-	user (id:6) {
+	user (id:2) {
     	name
         surname
         age
@@ -66,10 +51,10 @@ Gives
 {
     "data": {
         "user": {
-            "name": "Mario",
-            "surname": "Caster",
-            "_id": "55d70b33f53053b9239e3fbe",
-            "age": 30
+            "name": "Linux",
+            "surname": "Torvalds",
+            "age": 8,
+            "_id": "55ddeec2a54c37e61e0a2120"
         }
     }
 }
@@ -77,7 +62,7 @@ Gives
 * Adding a new user called Linus Torvalds of age 45 and getting the new info
 ```graphql
 mutation RootMutation {
-	addUser (name: "Linus", surname:"Torvalds", age:45) {
+	addUser (name: "Bjarne", surname:"Stroustrup", age:64) {
     	name
         surname
         _id
@@ -87,16 +72,27 @@ mutation RootMutation {
 ```
 
 Gives
-```javascript
+```json
 {
     "data": {
         "addUser": {
-            "name": "Linus",
-            "surname": "Torvalds",
-            "_id": "55d70e25f53053b9239e3fbf",
-            "age": 45
+            "name": "Bjarne",
+            "surname": "Stroustrup",
+            "_id": "55ddf61ed082460325e2b65c",
+            "age": 64
         }
     }
+}
+```
+Checking MongoDB:
+```javascript
+{
+	"name" : "Bjarne",
+	"surname" : "Stroustrup",
+	"age" : 64,
+	"_id" : ObjectId("55ddf61ed082460325e2b65c"),
+	"id" : "55ddf61ed082460325e2b65b",
+	"__v" : 0
 }
 ```
 
@@ -308,11 +304,10 @@ app.post('/', (req, res) => {
 
 ---
 
-# Roadmap
-* Relay
-* Not many established yet. I have read about something like unions, directives...
+# Relay
+You can see a more complex example of this using Relay here: https://github.com/sayden/relay-starter-kit
 
 # Contributions
 Please feel free to help, specially with grammar mistakes as english is not my mother language and I learned it watching "Two and a half men" :)
 
-Any other contribution must be on the road of simplicity to understand and to help others to learn GraphQL and it must have a README associated.
+Any other contribution must be on the road of simplicity to understand and to help others to learn GraphQL. Contributions  must have a README file associated or to update this.
