@@ -14,13 +14,7 @@ import Hobby from './HobbySchema.es6';
 export default {
   hobbies: {
     type: new GraphQLList(HobbyType),
-    resolve: () => {
-      return new Promise((resolve, reject) => {
-        Hobby.find({}, (err, res) => {
-          err ? reject(err) : resolve(res.hobbies);
-        });
-      });
-    }
+    resolve: Hobby.getListOfHobbies
   },
   hobby: {
     type: HobbyType,
@@ -29,13 +23,6 @@ export default {
         type: GraphQLID
       }
     },
-    resolve: (root, {id}) => {
-      return new Promise((resolve, reject) => {
-        //User is a Mongoose schema
-        Hobby.find({}, (err, res) => {
-            err ? reject(err) : resolve(res[id]);
-        });
-      });
-    }
+    resolve: Hobby.getHobbyByPosition
   }
 };

@@ -14,13 +14,7 @@ import User from './UserSchema.es6';
 export default {
   users: {
     type: new GraphQLList(UserType),
-    resolve: () => {
-      return new Promise((resolve, reject) => {
-        User.find({}).populate('hobbies').exec((err, res) => {
-          err ? reject(err) : resolve(res);
-        });
-      });
-    }
+    resolve: User.getListOfUsers
   },
   user: {
     type: UserType,
@@ -29,17 +23,6 @@ export default {
         type: GraphQLID
       }
     },
-    resolve: (root, {id}) => {
-      return new Promise((resolve, reject) => {
-        //User is a Mongoose schema
-        User.find({}).populate('hobbies').exec((err, res) => {
-          if (id == undefined) {
-            err ? reject(err) : resolve(res);
-          } else {
-            err ? reject(err) : resolve(res[id]);
-          }
-        });
-      });
-    }
+    resolve: User.getUserByPosition
   }
 };
