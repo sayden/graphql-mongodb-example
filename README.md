@@ -7,7 +7,8 @@ This is a project to show how to work with a Express app with GraphQL and MongoD
 ```bash
 $ git clone https://github.com/sayden/graphql-mongodb-example.git
 $ npm install
-$ gulp
+$ npm populate
+$ npm start
 ```
 ---
 
