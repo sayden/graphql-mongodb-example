@@ -13,7 +13,9 @@ $ npm start
 ---
 
 ## Using it
-For easyness, we will use Postman to make queries:
+This GraphQL example doesn't have any UI. For a UI example check my Relay example in [this relay example](https://github.com/sayden/relay-mongoose-example)
+
+For easyness, we will use Postman to make queries. For a GraphQL query you must use `POST` always to the root of the server (in this case, `localhost:9000`) and set set the header `Content-Type: application/graphql`:
 
 * Asking for the user with ID 0 (actually, the position 0 on the user list for easyness)
 ```graphql
