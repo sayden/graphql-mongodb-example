@@ -34,12 +34,6 @@
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-relay-plugin": "^0.1.2",
-    "babelify": "^6.2.0",
-    "browserify": "^11.0.1",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.1",
-    "gulp-load-plugins": "^0.10.0",
-    "gulp-nodemon": "^2.0.3",
-    "nodemon": "^1.4.1"
+    "babelify": "^6.2.0"
   }
 }
